@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Muscat Fashion Week</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,7 +25,7 @@
             </style>
         @endif
     </head>
-    <body class="text-[#fafafa] flex p-6 lg:p-8 items-center min-h-screen flex-col " style="background-image: url('{{ asset('img/bg.jpg') }}'); background-size: cover; background-position: center;">
+    <body class="text-[#fafafa] flex p-6 lg:p-8 items-center min-h-screen flex-col " style="background-image: url('{{ asset('img/bg.webp') }}'); background-size: cover; background-position: center;">
        <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
        <div class="absolute top-8 left-20 z-10">
         <img class="h-12 lg:h-25" src="{{ asset('img/logo.png') }}" alt="Logo">
@@ -51,7 +51,9 @@
               <input type="text" name="name" placeholder="Name" class="w-full mb-3 p-2 border border-gray-300 rounded">
               <input type="email" name="email" placeholder="Email" class="w-full mb-3 p-2 border border-gray-300 rounded">
               <input type="text" name="company" placeholder="Company" class="w-full mb-3 p-2 border border-gray-300 rounded">
+              <input type="text" name="job_title" placeholder="Job Title" class="w-full mb-3 p-2 border border-gray-300 rounded">
               <input type="tel" name="phone" placeholder="Phone Number" class="w-full mb-3 p-2 border border-gray-300 rounded">
+              <input type="text" name="country" placeholder="Country" class="w-full mb-3 p-2 border border-gray-300 rounded">
               <div class="buttons flex justify-between align-center">
                 <button type="submit" class="w-[45%] border-2 border-[#ffffff57] text-white font-bold py-2 px-6 rounded-full hover:bg-white hover:text-[#1b1b18] uppercase">Submit</button>
                 <button type="button" id="closePopup" class="w-[45%] border-2 border-[#ffffff57] text-white font-bold py-2 px-6 rounded-full hover:bg-white hover:text-[#1b1b18] uppercase">Close</button>
