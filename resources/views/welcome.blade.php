@@ -24,6 +24,18 @@
 <body class="text-[#fafafa] flex p-4 sm:p-6 lg:p-8 items-center min-h-screen flex-col "
     style="background-image: url('{{ asset('img/bg.webp') }}'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
+
+    <!-- Success Message -->
+    @if(session('success'))
+        <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50" id="successMessage">
+            {{ session('success') }}
+        </div>
+        <script>
+            setTimeout(function () {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        </script>
+    @endif
     <div class="absolute top-4 left-4 sm:top-6 sm:left-8 lg:top-8 lg:left-20 z-10">
         <img class="h-8 sm:h-10 md:h-12 lg:h-25" src="{{ asset('img/logo.png') }}" alt="Logo">
     </div>
@@ -50,19 +62,31 @@
                 <div class="bg-[#0c0c0c] p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-sm sm:max-w-md relative">
                     <button type="button" id="closePopupX"
                         class="absolute top-2 right-2 text-white hover:text-gray-300 text-xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#ffffff1a] transition-colors">&times;</button>
-                    <h2 class="text-lg sm:text-xl font-bold mb-4">Register</h2>
-                    <input type="text" name="name" placeholder="Name"
-                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-300 rounded">
-                    <input type="email" name="email" placeholder="Email"
-                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-300 rounded">
-                    <input type="text" name="company" placeholder="Company"
-                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-300 rounded">
-                    <input type="text" name="job_title" placeholder="Job Title"
-                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-300 rounded">
-                    <input type="tel" name="phone" placeholder="Phone Number"
-                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-300 rounded">
-                    <input type="text" name="country" placeholder="Country"
-                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-300 rounded">
+                    <h2 class="text-lg sm:text-xl font-bold mb-4 text-white">Register</h2>
+
+                    <!-- Validation Errors -->
+                    @if ($errors->any())
+                        <div class="bg-red-500 text-white p-2 rounded mb-4 text-sm">
+                            <ul class="list-none">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <input type="text" name="name" placeholder="Name" value="{{ old('name') }}" required
+                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-600 rounded text-white bg-gray-800 placeholder-gray-400">
+                    <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required
+                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-600 rounded text-white bg-gray-800 placeholder-gray-400">
+                    <input type="text" name="company" placeholder="Company" value="{{ old('company') }}"
+                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-600 rounded text-white bg-gray-800 placeholder-gray-400">
+                    <input type="text" name="job_title" placeholder="Job Title" value="{{ old('job_title') }}"
+                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-600 rounded text-white bg-gray-800 placeholder-gray-400">
+                    <input type="tel" name="phone" placeholder="Phone Number" value="{{ old('phone') }}"
+                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-600 rounded text-white bg-gray-800 placeholder-gray-400">
+                    <input type="text" name="country" placeholder="Country" value="{{ old('country') }}"
+                        class="w-full mb-3 p-2 text-sm sm:text-base border border-gray-600 rounded text-white bg-gray-800 placeholder-gray-400">
                     <div class="buttons flex justify-center">
                         <button type="submit"
                             class="w-full sm:w-auto border-2 border-[#ffffff57] text-white font-bold py-2 px-4 sm:px-6 text-sm sm:text-base rounded-full hover:bg-white hover:text-[#1b1b18] uppercase">Submit</button>
@@ -79,11 +103,23 @@
             document.getElementById('popup').classList.add('flex');
         });
 
-
-
         document.getElementById('closePopupX').addEventListener('click', function () {
             document.getElementById('popup').classList.add('hidden');
             document.getElementById('popup').classList.remove('flex');
+        });
+
+        // Show popup if there are validation errors
+        @if ($errors->any())
+            document.getElementById('popup').classList.remove('hidden');
+            document.getElementById('popup').classList.add('flex');
+        @endif
+
+        // Close popup when clicking outside of it
+        document.getElementById('popup').addEventListener('click', function (event) {
+            if (event.target === this) {
+                this.classList.add('hidden');
+                this.classList.remove('flex');
+            }
         });
     </script>
 </body>

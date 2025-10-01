@@ -16,7 +16,8 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::get('/login', [AuthController::class, 'getLoginPage'])
     ->name('login.page');
 
-Route::post('/contacts', [ContactController::class, 'create']);
+
+Route::post('/register', [ContactController::class, 'create']);
 
 Route::group(['auth:sanctum', 'middleware' => IsAdmin::class], function () {
    
