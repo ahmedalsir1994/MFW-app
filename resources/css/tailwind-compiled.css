@@ -1,0 +1,8 @@
+/* Main CSS file that imports all Tailwind CSS components */
+@import './components/tailwind-base.css';
+@import './components/base-styles.css';
+
+@layer components;
+
+@import './components/utilities.css';
+@import './components/animations.css';
