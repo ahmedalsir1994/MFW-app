@@ -34,7 +34,7 @@
         <p class="font-[Muslimah] text-sm sm:text-base md:text-lg lg:text-3xl uppercase">12 - 15 january 2026</p>
     </div>
     <div
-        class="absolute bottom-40 left-1/2 transform -translate-x-1/2 sm:bottom-16 md:bottom-20 lg:bottom-20 lg:left-20 lg:transform-none z-10">
+        class="absolute bottom-40 left-1/2 transform -translate-x-1/2 sm:bottom-16 md:bottom-20 lg:bottom-20 lg:left-35 lg:transform-none z-10">
         <button>
             <a class="font-[helvetica] uppercase border-2 border-[#ffffff57] text-white font-bold py-2 px-4 sm:px-6 text-sm sm:text-base rounded-full hover:bg-white hover:text-[#1b1b18]"
                 href="#">Register</a>
