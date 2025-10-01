@@ -8,6 +8,9 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function getLoginPage() {
+        return view('auth.login');
+    }
     public function login(Request $request) {
         $credentials = $request->validate([
             'email' => 'required|email',
