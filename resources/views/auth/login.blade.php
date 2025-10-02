@@ -43,11 +43,14 @@
                 </div>
                 <button type="submit" class="w-full py-2 border border-gray-200 text-white font-semibold rounded transition duration-200 hover:bg-[#6f06f8]">Login</button>
             </form>
-            @if (session('error'))
-                <div class="mt-4 text-red-500 text-sm text-center">
-                    {{ session('error') }}
+            @if ($errors->any())
+                <div class="mt-6 bg-red-600 text-white p-4 rounded">
+                    <ul class="list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-            
             @endif
         </div>
     </body>

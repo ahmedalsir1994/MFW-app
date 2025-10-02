@@ -16,15 +16,14 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::get('/login', [AuthController::class, 'getLoginPage'])
     ->name('login.page');
 
-Route::post('/contacts', [ContactController::class, 'create']);
+Route::post('/contacts', [ContactController::class, 'create'])->name('create');
 
 Route::group(['auth:sanctum', 'middleware' => IsAdmin::class], function () {
-   
+    Route::get('/dashboard', function() {
+        return view('admin.dashboard');
+    })->name('dashboard');
     Route::get('/contacts', [ContactController::class, 'getAllContacts']);
     Route::get('/contacts/{id}', [ContactController::class, 'getcontactById']);
     Route::delete('/contacts/{id}', [ContactController::class, 'delete']);
 });
 
- Route::get('/dashboard', function() {
-        return view('admin.dashboard');
-    })->name('dashboard');

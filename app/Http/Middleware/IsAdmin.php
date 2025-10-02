@@ -19,6 +19,6 @@ class IsAdmin
         if (Auth::check() && (Auth::user()->role === 'admin' || Auth::user()->role === 'user')) {
             return $next($request);
         }
-        return response()->json(['message' => 'Unauthorized'], 403);
+        return redirect('/' )->withErrors(['You do not have admin access. Please login again']);
     }
 }
