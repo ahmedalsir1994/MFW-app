@@ -22,8 +22,8 @@ Route::group(['auth:sanctum', 'middleware' => IsAdmin::class], function () {
     Route::get('/dashboard', function() {
         return view('admin.dashboard');
     })->name('dashboard');
-    Route::get('/contacts', [ContactController::class, 'getAllContacts']);
-    Route::get('/contacts/{id}', [ContactController::class, 'getcontactById']);
-    Route::delete('/contacts/{id}', [ContactController::class, 'delete']);
+    Route::get('/contacts', [ContactController::class, 'getAllContacts'])->name('getAllContacts');
+    Route::get('/contacts/{id}', [ContactController::class, 'getcontactById'])->name('getcontactById');
+    Route::delete('/contacts/{id}', [ContactController::class, 'delete'])->name('deleteContact');
 });
 

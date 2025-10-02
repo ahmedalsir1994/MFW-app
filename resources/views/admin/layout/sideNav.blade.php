@@ -5,20 +5,12 @@
                 <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
             </a>
         </li>
+
         <li>
             <a class="flex items-center text-white text-lg p-3 rounded-md hover:bg-gray-700" href="#">
                 <i class="fas fa-address-book mr-3"></i> Contacts
             </a>
         </li>
-        <li>
-            <a class="flex items-center text-white text-lg p-3 rounded-md hover:bg-gray-700" href="#">
-                <i class="fas fa-cogs mr-3"></i> Settings
-            </a>
-        </li>
-        <li>
-            <a class="flex items-center text-white text-lg p-3 rounded-md hover:bg-gray-700" href="#">
-                <i class="fas fa-sign-out-alt mr-3"></i> Logout
-            </a>
-        </li>
+       
     </ul>
 </div>

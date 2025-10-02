@@ -1,4 +1,2 @@
 @include('admin.layout.header')
-@include('admin.layout.sidenav')
-
-    
+@include('admin.layout.sideNav')
