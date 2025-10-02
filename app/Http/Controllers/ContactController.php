@@ -33,7 +33,7 @@ class ContactController extends Controller
     public function getcontactById($id)
     {
         $contact = Contact::findOrFail($id);
-        return view('contacts.show', compact('contact'));
+        return view('admin.contact.show', compact('contact'));
     }
 
     public function delete($id)

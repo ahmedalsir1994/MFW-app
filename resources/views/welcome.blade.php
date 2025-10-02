@@ -26,7 +26,7 @@
     <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
     <!-- error if found -->
     @if ($errors->any())
-        <div class="absolute top-4 right-4 z-10">
+        <div class="absolute top-4 right-4 z-10 w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px]">
             <div class="bg-red-600 text-white p-4 rounded-lg shadow-lg">
                 <h3 class="font-bold text-lg mb-2">Error</h3>
                 <ul class="list-disc list-inside">
@@ -37,6 +37,22 @@
                 <div class="text-right mt-4">
                     <button onclick="this.parentElement.parentElement.style.display='none'"
                         class="bg-white text-red-600 px-3 py-1 rounded-full hover:bg-gray-100 transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- success message if found -->
+    @if (session('success'))
+        <div class="absolute top-4 right-4 z-10">
+            <div class="bg-green-600 text-white p-4 rounded-lg shadow-lg">
+                <h3 class="font-bold text-lg mb-2">Success</h3>
+                <p class="text-sm">{{ session('success') }}</p>
+                <div class="text-right mt-4">
+                    <button onclick="this.parentElement.parentElement.style.display='none'"
+                        class="bg-white text-green-600 px-3 py-1 rounded-full hover:bg-gray-100 transition-colors">
                         Close
                     </button>
                 </div>
