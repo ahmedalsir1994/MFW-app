@@ -9,6 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::fallback(fn() => view('404'))->name('404');
+
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])
