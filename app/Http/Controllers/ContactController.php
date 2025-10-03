@@ -10,8 +10,13 @@ class ContactController extends Controller
 
     public function getAllContacts()
     {
-        $contacts = Contact::all()->sortBy('created_at');
-        return view('admin.contact.index', compact('contacts'));
+        try {
+            $contacts = Contact::all()->sortBy('created_at');
+            return view('admin.contact.index', compact('contacts'));
+        } catch (\Exception $e) {
+            // Handle case where table doesn't exist yet
+            return view('admin.contact.index', ['contacts' => collect()]);
+        }
     }
     public function create(Request $request)
     {
