@@ -20,32 +20,45 @@ class ContactController extends Controller
     }
     public function create(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:contacts,email',
-            'phone' => 'nullable|string|max:20',
-            'job_title' => 'nullable|string|max:255',
-            'company' => 'nullable|string|max:255',
-            'country' => 'nullable|string|max:255',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:contacts,email',
+                'phone' => 'nullable|string|max:20',
+                'job_title' => 'nullable|string|max:255',
+                'company' => 'nullable|string|max:255',
+                'country' => 'nullable|string|max:255',
+            ]);
 
-        Contact::create($validatedData);
+            Contact::create($validatedData);
 
-        return redirect('/')->with('success', 'we will contact you soon!');
+            return redirect('/')->with('success', 'we will contact you soon!');
+        } catch (\Exception $e) {
+            // Handle case where table doesn't exist yet
+            return redirect('/')->with('error', 'Contact form is temporarily unavailable. Please try again later.');
+        }
     }
 
 
     public function getcontactById($id)
     {
-        $contact = Contact::findOrFail($id);
-        return view('admin.contact.show', compact('contact'));
+        try {
+            $contact = Contact::findOrFail($id);
+            return view('admin.contact.show', compact('contact'));
+        } catch (\Exception $e) {
+            return redirect('/contacts')->with('error', 'Contact not found or database unavailable.');
+        }
     }
 
     public function delete($id)
     {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
+        try {
+            $contact = Contact::findOrFail($id);
+            $contact->delete();
 
-        return redirect('/contacts')->with('success', 'Contact deleted successfully!');
+            return redirect('/contacts')->with('success', 'Contact deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect('/contacts')->with('error', 'Unable to delete contact or database unavailable.');
+        }
     }
 }
