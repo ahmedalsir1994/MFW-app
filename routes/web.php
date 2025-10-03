@@ -9,6 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::fallback(fn() => view('404'))->name('404');
+
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])
@@ -16,16 +18,14 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::get('/login', [AuthController::class, 'getLoginPage'])
     ->name('login.page');
 
-
-Route::post('/register', [ContactController::class, 'create']);
+Route::post('/contacts', [ContactController::class, 'create'])->name('create');
 
 Route::group(['auth:sanctum', 'middleware' => IsAdmin::class], function () {
-   
-    Route::get('/contacts', [ContactController::class, 'getAllContacts']);
-    Route::get('/contacts/{id}', [ContactController::class, 'getcontactById']);
-    Route::delete('/contacts/{id}', [ContactController::class, 'delete']);
-});
-
- Route::get('/dashboard', function() {
+    Route::get('/dashboard', function() {
         return view('admin.dashboard');
     })->name('dashboard');
+    Route::get('/contacts', [ContactController::class, 'getAllContacts'])->name('getAllContacts');
+    Route::get('/contacts/{id}', [ContactController::class, 'getcontactById'])->name('getcontactById');
+    Route::delete('/contacts/{id}', [ContactController::class, 'delete'])->name('deleteContact');
+});
+

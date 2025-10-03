@@ -10,9 +10,8 @@ class ContactController extends Controller
 
     public function getAllContacts()
     {
-        $contacts = Contact::all()->sortBy('created_at')->paginate(10, ['*'], 'page', 1);
-
-        return view('contact.index', compact('contacts'));
+        $contacts = Contact::all()->sortBy('created_at');
+        return view('admin.contact.index', compact('contacts'));
     }
     public function create(Request $request)
     {
@@ -30,10 +29,11 @@ class ContactController extends Controller
         return redirect('/')->with('success', 'we will contact you soon!');
     }
 
+
     public function getcontactById($id)
     {
         $contact = Contact::findOrFail($id);
-        return view('contacts.show', compact('contact'));
+        return view('admin.contact.show', compact('contact'));
     }
 
     public function delete($id)

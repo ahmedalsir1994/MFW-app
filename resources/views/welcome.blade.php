@@ -24,17 +24,40 @@
 <body class="text-[#fafafa] flex p-4 sm:p-6 lg:p-8 items-center min-h-screen flex-col "
     style="background-image: url('{{ asset('img/bg.webp') }}'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
-
-    <!-- Success Message -->
-    @if(session('success'))
-        <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50" id="successMessage">
-            {{ session('success') }}
+    <!-- error if found -->
+    @if ($errors->any())
+        <div class="absolute top-4 right-4 z-10 w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px]">
+            <div class="bg-red-600 text-white p-4 rounded-lg shadow-lg">
+                <h3 class="font-bold text-lg mb-2">Error</h3>
+                <ul class="list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li class="text-sm">{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <div class="text-right mt-4">
+                    <button onclick="this.parentElement.parentElement.style.display='none'"
+                        class="bg-white text-red-600 px-3 py-1 rounded-full hover:bg-gray-100 transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
-        <script>
-            setTimeout(function () {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
-        </script>
+    @endif
+
+    <!-- success message if found -->
+    @if (session('success'))
+        <div class="absolute top-4 right-4 z-10">
+            <div class="bg-green-600 text-white p-4 rounded-lg shadow-lg">
+                <h3 class="font-bold text-lg mb-2">Success</h3>
+                <p class="text-sm">{{ session('success') }}</p>
+                <div class="text-right mt-4">
+                    <button onclick="this.parentElement.parentElement.style.display='none'"
+                        class="bg-white text-green-600 px-3 py-1 rounded-full hover:bg-gray-100 transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
     @endif
     <div class="absolute top-4 left-4 sm:top-6 sm:left-8 lg:top-8 lg:left-20 z-10">
         <img class="h-8 sm:h-10 md:h-12 lg:h-25" src="{{ asset('img/logo.png') }}" alt="Logo">
@@ -46,7 +69,7 @@
         <p class="font-[Muslimah] text-sm sm:text-base md:text-lg lg:text-3xl uppercase">12 - 15 january 2026</p>
     </div>
     <div
-        class="absolute bottom-40 left-1/2 transform -translate-x-1/2 sm:bottom-16 md:bottom-20 lg:bottom-20 lg:left-20 lg:transform-none z-10">
+        class="absolute bottom-40 left-1/2 transform -translate-x-1/2 sm:bottom-16 md:bottom-20 lg:bottom-20 lg:left-35 lg:transform-none z-10">
         <button>
             <a class="font-[helvetica] uppercase border-2 border-[#ffffff57] text-white font-bold py-2 px-4 sm:px-6 text-sm sm:text-base rounded-full hover:bg-white hover:text-[#1b1b18]"
                 href="#">Register</a>
@@ -55,7 +78,7 @@
 
     <!-- pop for register -->
     <div class="absolute bottom-10 lg:bottom-20 lg:left-20 z-10">
-        <form action="/register" method="POST">
+        <form action="{{ route('create') }}" method="POST">
             @csrf
             <div id="popup"
                 class="hidden fixed inset-0 bg-[#000000d3] bg-opacity-10 items-center justify-center z-50 p-4">
